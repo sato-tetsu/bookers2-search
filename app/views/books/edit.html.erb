@@ -1,0 +1,24 @@
+<% if flash[:alert1] %>									<!-- @book.errors.any? -->
+	<h5>error</h5>										<!-- @book.errors.count -->
+		<ul>
+			<% flash[:alert1].each do |message| %>
+				<li><h6><%= message %></h6></li>
+			<% end %>
+		</ul>
+<% end %>
+
+<div class="container">
+<div class="row">
+<div class="col-md-6 col-md-offset-3">
+
+<h1>Editing Book</h1>
+
+<%= render "books/newform", book: @book %>
+<%= link_to "Show", @book, class: "book_#{@book.id}" %>
+<%= link_to "Back", books_path, class: "back" %>
+
+</div>
+<div class="col-md-3"></div>
+
+</div>
+</div>
