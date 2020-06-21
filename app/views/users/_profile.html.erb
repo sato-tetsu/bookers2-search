@@ -12,8 +12,35 @@
 			<th>introduction</th>
 			<th><%= user.introduction %></th>
 		</tr>
+
+		<tr>
+			<th>follows</th>
+			<th>
+				<%= link_to("/users/#{user.id}/follow") do %>
+					<%= user.following_user.count %>
+				<% end %>
+			</th>
+		</tr>
+
+		<tr>
+			<th>followers</th>
+			<th>
+				<%= link_to("/users/#{user.id}/follower") do %>
+					<%= user.follower_user.count %>
+				<% end %>
+			</th>
+		</tr>
+
 </table>
 
 <div class="row">
-	<%= link_to '',edit_user_path(user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_#{user.id}" %>
+	<% if user.id != current_user.id %>
+		<% if current_user.following?(user) %>
+		     <%= link_to 'フォロー外す', destroy_path(user.id), method: :POST, class:"col-xs-12 btn btn-default" %>
+		<% else %>
+		     <%= link_to 'フォローする', create_path(user.id), method: :POST, class:"col-xs-12 btn btn-default" %>
+		<% end %>
+	<% else %>
+	    <%= link_to '',edit_user_path(user), class: "col-xs-12 btn btn-default glyphicon glyphicon-wrench edit_user_#{user.id}" %>
+	<% end %>
 </div>
