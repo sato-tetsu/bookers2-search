@@ -1,20 +1,3 @@
-<div class="container">
-	<%= render 'searchs/form'%>
-</div>
-
-<div class="container">
-	<div class="row">
-		<div class="col-xs-3">
-			<%= render 'users/profile', user: current_user %>
-			<!--メモ　右側の指定に注意。そこを間違えるとエラーが発生して表示されない -->
-			<%= render 'books/newform', book: @book %>
-		</div>
-
-
-		
-		<div class="col-xs-9">
-<h2>Users</h2>
-<!--users一覧 -->
 <table class="table">
 	<thead>
 		<tr>
@@ -25,12 +8,10 @@
 	</thead>
 
 	<tbody>
-		<% @users.each do |user| %>
+		<% users.each do |user| %>
 		<tr>
 			<td><%= attachment_image_tag(user, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %></td>
 			<td><%= user.name%></td>
-			<td>フォロー：<%= user.following_user.count%></td>
-			<td>フォロワー：<%= user.follower_user.count%></td>
 			<td><%= link_to "Show", user, class: "user_#{user.id}" %></td>
 			<td>
 				<% if current_user.id != user.id %>
@@ -45,9 +26,3 @@
 		<% end %>
 	</tbody>
 </table>
-<!--users一覧 -->
-		</div>
-	</div>
-</div>
-
-

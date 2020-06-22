@@ -10,4 +10,22 @@ class Book < ApplicationRecord
 	def favorited_by?(user)
         favorites.where(user_id: user.id).exists?
     end
+
+  def self.search(search, select, how_search)
+      if select == "2"
+        if how_search == "1"
+          Book.where(['title LIKE ?', "%#{search}"])   #完全一致検索
+        elsif how_search == "2"
+          Book.where(['title LIKE ?', "#{search}%"])  #前方一致検索
+        elsif how_search == "3"
+          Book.where(['title LIKE ?', "#{search}"])  #後方一致検索
+        elsif how_search == "4"
+          Book.where(['title LIKE ?', "%#{search}%"])  #部分一致検索
+        end
+        
+      else
+        Book.all
+      end
+    end
+
 end

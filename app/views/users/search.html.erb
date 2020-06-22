@@ -1,0 +1,14 @@
+<div class="container">
+	<%= render 'searchs/form'%>
+</div>
+
+<div class="container">
+	<h2>Search</h2>
+
+	<% if @users %>
+		<%= render 'searchs/users', users: @users%>
+	<% else %>
+		<%= render 'searchs/books', books: @books%>
+	<% end %>
+
+</div>
